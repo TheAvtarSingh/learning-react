@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
 
 export default function ListGroups() {
   let projects = [
@@ -13,12 +13,15 @@ export default function ListGroups() {
   // projects =[];
 
   /* const getMessage = () => {
-    return projects.length === 0 ? <p>No Items Found</p> : null;
+    return (projects.length === 0) ? <p>No Items Found</p> : null;
 } */
 
-const handleClick = (event:MouseEvent) => {
+  /* const handleClick = (event: MouseEvent) => {
     console.log(event);
-  }
+  }; */
+
+  // Managing State
+  const [selectedIndex, setselectedIndex] = useState(-1);
 
   return (
     <>
@@ -29,10 +32,14 @@ const handleClick = (event:MouseEvent) => {
         {projects.map((projects, index) => (
           <li
             key={projects}
-            onClick={handleClick}
-            className="list-group-item"
+            onClick={() => setselectedIndex(index)}
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
           >
-            {projects}
+            Number {index + 1} : {projects}
           </li>
         ))}
         {/* <li className="list-group-item">Cras justo odio</li>
